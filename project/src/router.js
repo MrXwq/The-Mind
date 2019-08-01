@@ -108,21 +108,24 @@ export default new Router({
             },
             // 个人幸福、
             {
-              path: 'happinessprivate',
+              path: 'happinessprivate/:id',
               name: 'happinessprivate',
-              component: () => import( './views/HappinessPrivate.vue')
+              component: () => import( './views/HappinessPrivate.vue'),
+              props:true
             },
             // 个人后悔、
             {
-              path: 'regretprivate',
+              path: 'regretprivate/:id',
               name: 'regretprivate',
-              component: () => import( './views/RegretPrivate.vue')
+              component: () => import( './views/RegretPrivate.vue'),
+              props:true
             },
             // 个人感恩、
             {
-              path: 'gratitudeprivate',
+              path: 'gratitudeprivate/:id',
               name: 'gratitudeprivate',
-              component: () => import( './views/GratitudePrivate.vue')
+              component: () => import( './views/GratitudePrivate.vue'),
+              props:true
             },
           ]
         },

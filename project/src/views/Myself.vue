@@ -41,11 +41,11 @@
                     <span slot="title">已发表</span>
                 </template>
 
-                <el-menu-item index="/mood/myself/happinessprivate">个人幸福</el-menu-item>
+                <el-menu-item :index="happinessPrivateUrl">个人幸福</el-menu-item>
                 
-                <el-menu-item index="/mood/myself/regretprivate">个人后悔</el-menu-item>
+                <el-menu-item :index="regretPrivateUrl">个人后悔</el-menu-item>
 
-                <el-menu-item index="/mood/myself/gratitudeprivate">个人感恩</el-menu-item>
+                <el-menu-item :index="gratitudePrivateUrl">个人感恩</el-menu-item>
                 
             </el-submenu>
         </el-menu>
@@ -67,10 +67,16 @@ export default {
             safeurl: `/mood/myself/safe/${JSON.parse(localStorage.getItem('userId'))}`,
             happinesshadurl: `/mood/myself/happiness/had/${JSON.parse(localStorage.getItem('userId'))}`,
             happinesshopeurl: `/mood/myself/happiness/hope/${JSON.parse(localStorage.getItem('userId'))}`,
+            happinessPrivateUrl: `/mood/myself/happinessprivate/${JSON.parse(localStorage.getItem('userId'))}`,
+
             regrethadurl: `/mood/myself/regret/had/${JSON.parse(localStorage.getItem('userId'))}`,
             regretremedyurl: `/mood/myself/regret/remedy/${JSON.parse(localStorage.getItem('userId'))}`,
+            regretPrivateUrl: `/mood/myself/regretprivate/${JSON.parse(localStorage.getItem('userId'))}`,
+
             gratitudehadurl: `/mood/myself/gratitude/had/${JSON.parse(localStorage.getItem('userId'))}`,
             gratituderepayurl: `/mood/myself/gratitude/repay/${JSON.parse(localStorage.getItem('userId'))}`,
+            gratitudePrivateUrl: `/mood/myself/gratitudeprivate/${JSON.parse(localStorage.getItem('userId'))}`,
+
         }
         
     },

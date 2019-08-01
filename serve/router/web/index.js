@@ -56,87 +56,77 @@ module.exports = app => {
         await next()
     } ,router)
     
-    // 获取个人幸福列表
-    router.get('/happinesslist/:id',async (req, res) => {
-
-        const items = await Happiness.find({hid:req.params.id})
-        // aggregate([
-        //     {
-        //         $lookup: {
-        //             from: 'users',
-        //             localField: '_id',
-        //             foreignField: 'happiness',
-        //             as: 'userList'
-        //         },
-        //     }
-        // ])
-        res.send(items)
-    })
+    
     // 获取所有幸福列表
     router.get('/happinesslist',async (req, res) => {
         const items = await Happiness.find()
         res.send(items)
     })
-    // 创建个人幸福列表
-    // router.post('/happinesslist/:id',async (req, res) => {
-    //     console.log('传过来的信息：'+ req.body.happiness[0])
-    //     await User.updateOne({_id:req.params.id},
-    //         { $push:
-    //             {happiness:req.body.happiness[0]}
-    //     })
-    // })
+    // 创造幸福时刻
     router.post('/happinesslist',async (req, res) => {
         console.log('传过来的信息：'+ req.body.happiness[0])
         const items =await Happiness.create(req.body.happiness[0])
         res.send(items)
     })
-    // router.put('/happinesslist/:id',async (req, res) => {
-    //     const items = await User.findByIdAndUpdate(req.params.id, req.body)
-    //     res.send(items)
-    // })
+    // 获取个人幸福列表
+    router.get('/happinessprivate/:id',async (req, res) => {
+
+        const items = await Happiness.find({hid:req.params.id})
+        res.send(items)
+    })
+    // 根据id删除单条幸福记录
+    router.delete('/happinessprivate/:id', async (req, res) => {
+        console.log(req)
+        const items = await Happiness.findByIdAndDelete(req.params.id)
+        res.send(items)
+    })
+
     // 获取所有后悔列表
     router.get('/regretlist',async (req, res) => {
         const items = await Regret.find()
         res.send(items)
     })
-    // 获取个人后悔列表
-    router.get('/regretlist/:id',async (req, res) => {
-        const items = await Regret.find({hid:req.params.id})
-        res.send(items)
-    })
-    // 创建个人后悔列表
+    // 创建个人后悔时刻
     router.post('/regretlist',async (req, res) => {
         console.log('传过来的信息：'+ req.body.regret.rid)
         const items =await Regret.create(req.body.regret)
         console.log(items)
         res.send(items)
     })
-    // router.put('/regretlist/:id',async (req, res) => {
-    //     const items = await User.findByIdAndUpdate(req.params.id, req.body)
-    //     res.send(items)
-    // })
+    // 获取个人后悔列表
+    router.get('/regretprivate/:id',async (req, res) => {
+        const items = await Regret.find({rid:req.params.id})
+        res.send(items)
+    })
+    // 根据id删除单条后悔记录
+    router.delete('/regretprivate/:id', async (req, res) => {
+        console.log(req)
+        const items = await Regret.findByIdAndDelete(req.params.id)
+        res.send(items)
+    })
+
     // 获取所有感恩列表
     router.get('/gratitudelist',async (req, res) => {
         const items = await Gratitude.find()
         res.send(items)
     })
-    // 获取个人感恩列表
-    router.get('/gratitudelist/:id',async (req, res) => {
-        console.log('传过来的信息：'+ req.body.gratitude)
-        await User.updateOne({_id:req.params.id},
-            { $push:
-                {gratitude:req.body.gratitude}
-        })
-    })
-    // 创建感恩列表
+    // 创建感恩时刻
     router.post('/gratitudelist',async (req, res) => {
         const items = await Gratitude.create(req.body.gratitude)
         res.send(items)
     })
-    // router.put('/gratitudelist/:id',async (req, res) => {
-    //     const items = await User.findByIdAndUpdate(req.params.id, req.body)
-    //     res.send(items)
-    // })
+    // 获取个人感恩列表
+    router.get('/gratitudeprivate/:id',async (req, res) => {
+        
+        let items = await Gratitude.find({gid:req.params.id})
+        res.send(items)
+    })
+    // 根据id删除单条感恩记录
+    router.delete('/gratitudeprivate/:id', async (req, res) => {
+        console.log(req)
+        const items = await Gratitude.findByIdAndDelete(req.params.id)
+        res.send(items)
+    })
 
     router.get('/moodlist', async (req, res) => {
         const happinesslist = await Happiness.find()

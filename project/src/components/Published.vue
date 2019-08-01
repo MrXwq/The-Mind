@@ -48,11 +48,11 @@
     data() {
         
       return {
-          id: this.$parent.id,
-          mood:"",
-          routeName: "",
+        id: this.$parent.id,
+        mood:"",
+        routeName: "",
         form: {
-            mes:''
+            [mes]:''
         }
       }
     },
@@ -96,13 +96,7 @@
             case 'regrethad': 
             this.routeName = 'regretlist',this.mood = '后悔时刻';break;
         }
-        // if(this.$route.name === 'gratitudehad') {
-        //     this.routeName = 'gratitudelist'
-        //     this.mood = '感恩时刻'
-        // }else if(this.$route.name === 'happinesshad') {
-        //     this.routeName = 'happinesslist'
-        //     this.mood = '幸福时刻'
-        // }else if()
+
     }
   }
 </script>

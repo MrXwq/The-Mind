@@ -41,9 +41,12 @@ Vue.prototype.$http.interceptors.response.use(res => {
 // 注册全局组件
 import Published from './components/Published.vue'
 Vue.component('m-published', Published)
+// 各区内容展示组件
 import MoodContent from './components/MoodContent.vue'
 Vue.component('m-moodcontent', MoodContent)
-
+// 私有内容展示组件
+import PrivateMood from './components/PrivateMood.vue'
+Vue.component('m-privatemood', PrivateMood)
 
 // 全局都可以使用这个函数
 Vue.mixin({

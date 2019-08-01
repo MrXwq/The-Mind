@@ -27,7 +27,7 @@ export default {
         async petch() {
             // let res = await this.$http.get(`mood/${this.$route.name}/${JSON.parse(localStorage.getItem('userId'))}`)
             let res = await this.$http.get(`mood/${this.$route.name}`)
-            console.log(res)
+            console.log(this.$route)
             // 获取所有随机排列
             if(this.$route.name === 'moodlist'){
                 this.mes = res.data.sort(() => {
