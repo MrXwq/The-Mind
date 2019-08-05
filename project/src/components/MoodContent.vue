@@ -14,28 +14,58 @@
                 <div class="hlTime">{{item.time | dateForm}}</div>
             </div>
         </div>
+
+        <!-- 分页 -->
+        <el-pagination
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-size="pageItem"
+            layout="prev, pager, next, jumper"
+            :total="data">
+        </el-pagination>
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
+            // 请求回来的数据
             mes: {},
+            // 当前页
+            currentPage: 1,
+            // 每页展示的条数
+            pageItem: 3,
+            // 总数据
+            data: 1,
+
+            // 数据过渡
+            resarr:{}
         }
     },
     methods: {
+        
+        handleCurrentChange(val) {
+            this.currentPage = val
+            console.log(`当前页: ${val}`);
+        },
         async petch() {
             // let res = await this.$http.get(`mood/${this.$route.name}/${JSON.parse(localStorage.getItem('userId'))}`)
             let res = await this.$http.get(`mood/${this.$route.name}`)
-            console.log(this.$route)
-            // 获取所有随机排列
+            
+            // 所有区根据创造时间来排序
             if(this.$route.name === 'moodlist'){
-                this.mes = res.data.sort(() => {
-                    return Math.random() - 0.5
-                })
+                this.resarr = res.data.sort((a,b)=> {
+                return Date.parse(b.createdAt)-Date.parse(a.createdAt)
+                this.mes = this.resarr
+            })
             }else {
-                this.mes = res.data
+                this.resarr = res.data
+                this.mes = this.resarr
             }
+            // 总数据长度
+            this.pageNum = res.data.length
+
+            this.mes = this.resarr.slice((this.currentPage-1)*this.pageItem,this.pageItem*this.currentPage)
         },
         
     },
@@ -47,7 +77,14 @@ export default {
             var date = new Date(val)
             return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         }
-    }
+    },
+    watch: {
+        // 监听页数的变化
+        'currentPage': function(newVal) {
+            // 计算分页数据
+            this.mes = this.resarr.slice((this.currentPage-1)*this.pageItem,this.pageItem*this.currentPage)
+        }
+    },
 }
 </script>
 <style lang="scss">
