@@ -21,7 +21,7 @@
             :current-page="currentPage"
             :page-size="pageItem"
             layout="prev, pager, next, jumper"
-            :total="data">
+            :total="allData">
         </el-pagination>
     </div>
 </template>
@@ -36,14 +36,14 @@ export default {
             // 每页展示的条数
             pageItem: 3,
             // 总数据
-            data: 1,
+            allData: 1,
 
             // 数据过渡
             resarr:{}
         }
     },
     methods: {
-        
+        // 当前页改变赋值
         handleCurrentChange(val) {
             this.currentPage = val
             console.log(`当前页: ${val}`);
@@ -63,9 +63,13 @@ export default {
                 this.mes = this.resarr
             }
             // 总数据长度
-            this.pageNum = res.data.length
+            this.allData = res.data.length
 
-            this.mes = this.resarr.slice((this.currentPage-1)*this.pageItem,this.pageItem*this.currentPage)
+            // this.mes = this.resarr.slice((this.currentPage-1)*this.pageItem,this.pageItem*this.currentPage)
+            let ar = [10,22,2,3].find((item, index) => {
+                return item > 1
+            })
+            console.log(ar)
         },
         
     },
